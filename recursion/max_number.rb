@@ -14,12 +14,12 @@
 
 =end
 
-# def max_number(array, pointer=0, max=0)
-#   return max if pointer == array.size
-# 
-#   max = array[pointer] if array[pointer] > max
-#   max_number(array, pointer + 1, max)
-# end
+def max_number(array, pointer=0, max=0)
+  return max if pointer == array.size
+
+  max = array[pointer] if array[pointer] > max
+  max_number(array, pointer + 1, max)
+end
 
 # ============================================
 #
@@ -30,6 +30,25 @@ def max_number(array, max=0)
 
   max = array.first if array.first > max
   max_number(array[1..-1], max)
+end
+
+# ===========================================
+# 
+# answer from group:
+
+def max_number(nums, max=-Float::INFINITY)
+  if nums.length == 1
+    max = nums.first if nums.first > max
+    return max
+  else
+    mid = (nums.length - 1) / 2
+    left = nums[0..mid]
+    right = nums[mid + 1..nums.length - 1]
+  end
+
+  max = max_number(left, max)
+  max = max_number(right, max)
+  max
 end
 
 puts max_number([1, 2, 4, 7, 3]) == 7
