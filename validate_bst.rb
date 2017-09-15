@@ -1,3 +1,4 @@
+require 'pry'
 # Given a binary tree, determine if it is a valid binary search tree (BST).
 # 
 # Assume a BST is defined as follows:
@@ -7,29 +8,40 @@
 # Both the left and right subtrees must also be binary search trees.
 #
 # -------
-# Inorder traversal solution using recursive helper
+# solution from CtCI book
 #
 # Currently fails with [1, 1] input on leetcode
 
-def is_valid_bst(root)
-  is_valid_bst_recurse(root, nil)
+class TreeNode
+  attr_accessor :val, :left, :right
+
+  def initialize(val)
+    @val = val
+    @left, @right = nil, nil
+  end
 end
 
-def is_valid_bst_recurse(root, prev)
-  if root
-    if !is_valid_bst_recurse(root.left, prev)
-      return false
-    end
+def is_valid_bst(root)
+  is_valid_bst_helper(root, nil, nil)
+end
 
-    if prev && root.val <= prev.val
-      return false
-    end
+def is_valid_bst_helper(root, min, max)
+  return true if root.nil?
 
-    prev = root
+  if min && root.val <= min || max && root.val > max
+    return false
+  end
 
-    return is_valid_bst_recurse(root.right, prev)
+  if !is_valid_bst_helper(root.left, min, root.val) ||
+     !is_valid_bst_helper(root.right, root.val, max)
+    return false
   end
 
   true
 end
 
+root = TreeNode.new(1)
+a = TreeNode.new(1)
+root.left = a
+
+is_valid_bst(root)
