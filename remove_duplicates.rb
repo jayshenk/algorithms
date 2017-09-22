@@ -1,17 +1,41 @@
-# https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+=begin
+
+Given a sorted array, remove the duplicates in place such that each element
+appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this in place with
+constant memory.
+
+For example,
+Given input array nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being
+1 and 2 respectively. It doesn't matter what you leave beyond the new length.
+
+=======================
+
+remove duplicates in place
+return new length
+you can have elements beyond the new length
+
+two pointers
+
+=end
 
 def remove_duplicates(nums)
-  return 0 if nums.length == 0
-  left_index = 0
-  right_index = 1
+  return 0 if nums.empty?
 
-  while right_index < nums.length
-    if nums[left_index] != nums[right_index]
-      left_index += 1
-      nums[left_index] = nums[right_index]
+  left = 0
+  right = 1
+
+  while right < nums.size
+    if nums[left] != nums[right]
+      left += 1
+      nums[left] = nums[right]
     end
-    right_index += 1
+    right += 1
   end
 
-  left_index + 1
+  left + 1
 end
+

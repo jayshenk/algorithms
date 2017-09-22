@@ -28,12 +28,28 @@ def can_jump_helper(nums, idx, possible_jumps)
 
   (idx + 1..furthest_jump).each do |index|
     if can_jump_helper(nums, index, possible_jumps)
-      possible_jumps[index] = true
+      possible_jumps[idx] = true
       return true
     end
   end
 
-  possible_jumps[idx] = false
-  false
+  possible_jumps[idx] || possible_jumps[idx] = false
+end
+
+# iterative approach
+
+def can_jump(nums)
+  cache = [true]
+
+  (0..nums.length - 1).each do |position|
+    next unless cache[position]
+    furthest_index_reachable = [nums[position] + position, nums.length - 1].min
+
+    (position + 1..furthest_index_reachable).each do |index|
+      cache[index] = true
+    end
+  end
+
+  !!cache[nums.length - 1]
 end
 
