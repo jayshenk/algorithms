@@ -45,20 +45,19 @@ end
 # solution from leetcode:
 
 def remove_elements(head, val)
-  dummy_head = ListNode.new(nil)
-  dummy_head.next = head
+  dummy = ListNode.new(nil)
+  dummy.next = head
+  current = dummy
 
-  current = dummy_head
-
-  while current != nil && current.next != nil do
-    if current.next.val == val
-      current.next = current.next.next
-    else
-      current = current.next
-    end
+  while current && current.next
+   if current.next.val == val
+     current.next = current.next.next
+   else
+     current = current.next
+   end
   end
 
-  dummy_head.next
+  dummy.next
 end
 
 a = ListNode.new(1)
