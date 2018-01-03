@@ -37,4 +37,3 @@ var permute_helper = function(nums, solution, result) {
   });
 };
 
-console.log(permute([1,2,3]));
