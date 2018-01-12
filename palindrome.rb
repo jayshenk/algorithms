@@ -15,3 +15,42 @@ end
 p is_palindrome('A man, a plan, a canal: Panama')
 p is_palindrome('')
 p is_palindrome('a.')
+
+# Alternate solution
+
+def is_palindrome(s)
+  return true if s.length < 2
+
+  left = 0
+  right = s.length - 1
+
+  while !alphanumeric?(s[left])
+    left += 1
+  end
+
+  while !alphanumeric?(s[right])
+    right -= 1
+  end
+
+  while left < right
+    return false if s[left].downcase != s[right].downcase
+
+    left += 1
+    right -= 1
+
+    while !alphanumeric?(s[left])
+      left += 1
+    end
+
+    while !alphanumeric?(s[right])
+      right -= 1
+    end
+  end
+
+  true
+end
+
+def alphanumeric?(char)
+  !!char.match(/[a-zA-Z0-9]/)
+end
+

@@ -1,12 +1,12 @@
 // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
-// 
+//
 // Example:
 // Given nums = [2, 7, 11, 15], target = 9,
-// 
+//
 // Because nums[0] + nums[1] = 2 + 7 = 9,
 // return [0, 1].
-// 
+//
 // O(N^2) solution:
 
 var twoSum = function(nums, target) {
@@ -34,6 +34,23 @@ var twoSum = function(nums, target) {
     }
   }
 };
+
+// T: O(N) S: O(1)
+
+function twoSum(numbers, target) {
+  let left = 0;
+  let right = numbers.length - 1;
+
+  while (true) {
+    if (numbers[left] + numbers[right] > target) {
+      right--;
+    } else if (numbers[left] + numbers[right] < target) {
+      left++;
+    } else {
+      return [left + 1, right + 1];
+    }
+  }
+}
 
 console.log(twoSum([2, 7, 11, 15], 9)); // [0, 1]
 console.log(twoSum([3, 3], 6));         // [0, 1]
